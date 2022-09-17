@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         Book::factory(100)->create();
+//         Book::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+         Book::factory(10)->create([
+             'title' => 'Default title',
+             'author' => 'Unknown author',
+         ]);
     }
 }

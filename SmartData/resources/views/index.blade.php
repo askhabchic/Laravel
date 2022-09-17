@@ -3,33 +3,28 @@
 @section('title', 'Books')
 
 @section('content')
+    <a class="btn btn-primary" role="button" href="{{route('books.create')}}">Add new book</a>
+
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
         </tr>
         </thead>
         <tbody>
+        @foreach($books as $book)
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row">{{$book->id}}</th>
+            <td>{{$book->title}}</td>
+            <td>{{$book->author}}</td>
+            <td>
+                <a type="button" class="btn btn-secondary" href="{{ route('books.edit', $book) }}">Edit</a>
+            </td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr>
+        @endforeach
+
         </tbody>
     </table>
 @endsection
