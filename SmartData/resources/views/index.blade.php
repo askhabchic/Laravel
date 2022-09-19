@@ -3,7 +3,6 @@
 @section('title', 'Books')
 
 @section('content')
-    <a class="btn btn-primary" role="button" href="{{route('books.create')}}">Add new book</a>
 
     <table class="table">
         <thead>
@@ -17,14 +16,19 @@
         @foreach($books as $book)
         <tr>
             <th scope="row">{{$book->id}}</th>
-            <td>{{$book->title}}</td>
-            <td>{{$book->author}}</td>
+            <th>
+                <a href="{{ route('books.show', $book) }}">{{$book->title}}</a>
+            </td>
             <td>
-                <a type="button" class="btn btn-secondary" href="{{ route('books.edit', $book) }}">Edit</a>
+                <a href="{{ route('books.show', $book) }}">{{$book->author}}</a>
+            </td>
+            <td>
+                <a type="button" class="btn btn-success" href="{{ route('books.edit', $book) }}">Edit</a>
             </td>
         </tr>
         @endforeach
 
         </tbody>
     </table>
+    <a class="btn btn-primary" role="button" href="{{route('books.create')}}">Add new book</a>
 @endsection

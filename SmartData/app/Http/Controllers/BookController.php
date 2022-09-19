@@ -38,7 +38,6 @@ class BookController extends Controller
     {
         Book::create($request->only(['title', 'author']));
         return redirect()->route('books.index');
-//        dd($request->all());
     }
 
     /**
@@ -49,7 +48,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('show');
+        return view('show', compact('book'));
     }
 
     /**
@@ -72,7 +71,8 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $book->update($request->only(['title', 'author']));
+        return redirect()->route('books.index');
     }
 
     /**
