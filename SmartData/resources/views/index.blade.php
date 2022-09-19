@@ -23,7 +23,12 @@
                 <a href="{{ route('books.show', $book) }}">{{$book->author}}</a>
             </td>
             <td>
-                <a type="button" class="btn btn-success" href="{{ route('books.edit', $book) }}">Edit</a>
+                <form method="POST" action="{{ route('books.destroy', $book) }}">
+                    <a type="button" class="btn btn-success" href="{{ route('books.edit', $book) }}">Edit</a>
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
             </td>
         </tr>
         @endforeach
