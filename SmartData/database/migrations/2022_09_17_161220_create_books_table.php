@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->default('');
             $table->string('author')->default('');
+            $table->integer('amount')->default(1);
             $table->timestamps();
         });
     }

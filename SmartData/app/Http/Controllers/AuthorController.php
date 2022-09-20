@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -14,7 +15,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::get();
+        return view('indexAuthor', compact('authors'));
     }
 
     /**
@@ -24,7 +26,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('formAuthor');
     }
 
     /**
@@ -35,7 +37,8 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Author::create($request->only(['name', 'books_amount']));
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -46,7 +49,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        return view('showAuthor', compact('author'));
     }
 
     /**
@@ -57,7 +60,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view('formAuthor', compact('author'));
     }
 
     /**
@@ -69,7 +72,8 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $author->update($request->only(['name', 'books_amount']));
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -80,6 +84,7 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+        return redirect()->route('authors.index');
     }
 }
