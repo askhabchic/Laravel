@@ -15,14 +15,11 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
-        $res = [];
-
+        $authors = Author::paginate(10);
         foreach ($authors as $author) {
-            $res[$author['id']]['name'] = $author['name'];
-            $res[$author['id']]['count'] = count($author->books);
+            $author['count'] = count($author->books);
         }
-        return view('indexAuthor', compact('res'));
+        return view('indexAuthor', compact('authors'));
     }
 
     /**

@@ -41,14 +41,14 @@ class BookController extends Controller
         $name = $request->only(['author']);
         $author = DB::table('authors')->select('*')->where('name', $name)->get()->first();
         if ($author) {
-            $book['author'] = $author->name;
+            $book['author'] = $author->id;
         } else {
             $book['author'] = DB::table('authors')->insertGetId([
                 'name' => $name['author']
             ]);
         }
 
-        $req = Book::create($book);
+        Book::create($book);
         return redirect()->route('books.index');
     }
 

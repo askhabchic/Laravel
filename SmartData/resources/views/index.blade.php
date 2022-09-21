@@ -19,7 +19,7 @@
                 <a href="{{ route('books.show', $book) }}">{{ $book->title }}</a>
             </td>
             <td>
-                <a href="{{ route('books.show', $book) }}">{{ $book->author}}</a>
+                <a href="{{ route('books.show', $book) }}">{{ $book->author }}</a>
             </td>
             <td>
                 <form method="POST" action="{{ route('books.destroy', $book) }}">
