@@ -3,7 +3,7 @@
 @section('title', isset($author) ? 'Update '.$author->name : 'Create author')
 
 @section('content')
-    <a type="button" class="btn btn-secondary" href="{{ route('authors.index') }}">Back to main page</a>
+    <a type="button" class="btn btn-secondary" href="/">Back to main</a>
     <form method="POST"
           @if(isset($author))
           action="{{ route('authors.update', $author) }}"

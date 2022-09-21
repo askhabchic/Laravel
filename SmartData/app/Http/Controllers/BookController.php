@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -14,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::get();
+        $books = Book::paginate(10);
         return view('index', compact('books'));
     }
 
@@ -36,7 +37,28 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        Book::create($request->only(['title', 'author']));
+        $data = $request->only(['title']);
+        $name = $request->only(['author']);
+        $author = DB::table('authors')->select('*')->where('name', $name)->get()->first();
+        if ($author) {
+            $data['author'] = $author->id;
+        } else {
+            $data['author'] = DB::table('authors')->insertGetId([
+                'name' => $name['author']
+            ]);
+        }
+
+//        $book = $request->only('title');
+//        $author_name = $request->only('author');
+//        $author = DB::table('authors')->select('*')->where('author', $author_name)->get()->first();
+//        if ($author) {
+//            $book['author'] = $author->id;
+//        } else {
+//            $book['author'] = DB::table('authors')
+//                ->insertGetId(['name' => $author_name['author']]);
+//        }
+//        $req = Book::create($book);
+        $req = Book::create($data);
         return redirect()->route('books.index');
     }
 

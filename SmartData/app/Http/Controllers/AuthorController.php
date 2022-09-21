@@ -15,7 +15,10 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::get();
+        $authors = Author::paginate(10);
+        foreach ($authors as $author) {
+            $author['count'] = count($author->books);
+        }
         return view('indexAuthor', compact('authors'));
     }
 
@@ -37,7 +40,7 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        Author::create($request->only(['name', 'books_amount']));
+        Author::create($request->only('name'));
         return redirect()->route('authors.index');
     }
 
@@ -72,7 +75,7 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        $author->update($request->only(['name', 'books_amount']));
+        $author->update($request->only(['name']));
         return redirect()->route('authors.index');
     }
 

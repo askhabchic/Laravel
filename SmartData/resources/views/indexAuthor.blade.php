@@ -3,7 +3,6 @@
 @section('title', 'Authors')
 
 @section('content')
-
     <table class="table mt-3">
         <thead>
         <tr>
@@ -14,26 +13,33 @@
         </thead>
         <tbody>
         @foreach($authors as $author)
-        <tr>
-            <th scope="row">{{$author->id}}</th>
-            <th>
-                <a href="{{ route('authors.show', $author) }}">{{$author->name}}</a>
-            </td>
-            <td>
-                <a href="{{ route('authors.show', $author) }}">{{$author->books_amount}}</a>
-            </td>
-            <td>
-                <form method="POST" action="{{ route('authors.destroy', $author) }}">
-                    <a type="button" class="btn btn-success" href="{{ route('authors.edit', $author) }}">Edit</a>
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <th scope="row">{{$author->id}}</th>
+                <th>
+                    <a href="{{ route('authors.show', $author) }}">{{$author->name}}</a>
+                </td>
+                <td>
+                    <a href="{{ route('authors.show', $author) }}"> {{ $author->books_amount ?? 0 }}</a>
+                </td>
+                <td>
+                    <form method="POST" action="{{ route('authors.destroy', $author) }}">
+                        <a type="button" class="btn btn-success" href="{{ route('authors.edit', $author) }}">Edit</a>
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
         @endforeach
 
         </tbody>
     </table>
-    <a class="btn btn-primary mt-1" role="button" href="{{route('authors.create')}}">Add new author</a>
+    <tr>
+        <td>
+            <a class="btn btn-primary" role="button" href="{{route('authors.create')}}">Add new author</a>
+        </td>
+        <td>
+            <a type="button" class="btn btn-secondary" href="/">Back to main</a>
+        </td>
+    </tr>
 @endsection

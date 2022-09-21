@@ -15,7 +15,7 @@
         @isset($book)
             @method('PUT')
         @endisset
-        <div class="row">
+        <div class="row ">
             <div class="col">
                 <input name="title" value="{{ isset($book) ? $book->title : null }}"
                        type="text" class="form-control mt-3" placeholder="Title" aria-label="title">

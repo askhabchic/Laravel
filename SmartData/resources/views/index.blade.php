@@ -3,7 +3,6 @@
 @section('title', 'Books')
 
 @section('content')
-
     <table class="table">
         <thead>
         <tr>
@@ -20,7 +19,7 @@
                 <a href="{{ route('books.show', $book) }}">{{$book->title}}</a>
             </td>
             <td>
-                <a href="{{ route('books.show', $book) }}">{{$book->author}}</a>
+                <a href="{{ route('books.show', $book) }}">{{ $book->author->name ?? ''}}</a>
             </td>
             <td>
                 <form method="POST" action="{{ route('books.destroy', $book) }}">
@@ -35,5 +34,13 @@
 
         </tbody>
     </table>
-    <a class="btn btn-primary" role="button" href="{{route('books.create')}}">Add new book</a>
+    <tr>
+        <td>
+            <a class="btn btn-primary" role="button" href="{{route('books.create')}}">Add new book</a>
+        </td>
+        <td>
+            <a type="button" class="btn btn-secondary" href="/">Back to main</a>
+        </td>
+    </tr>
+
 @endsection

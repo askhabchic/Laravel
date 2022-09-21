@@ -8,8 +8,6 @@
         <div class="card-header">Name: {{ $author->name }}</div>
         <div class="card-body">
             <h5 class="card-title">Books amount: {{ $author->books_amount }}</h5>
-            <p class="card-text">Created: {{ $author->created_at->format('h:i:s d/m/y') }}.<br>
-                Update: {{ $author->updated_at->format('h:i:s d/m/y') }}.</p>
         </div>
     </div>
 
