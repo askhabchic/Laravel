@@ -37,28 +37,18 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['title']);
+        $book = $request->only(['title']);
         $name = $request->only(['author']);
         $author = DB::table('authors')->select('*')->where('name', $name)->get()->first();
         if ($author) {
-            $data['author'] = $author->id;
+            $book['author'] = $author->name;
         } else {
-            $data['author'] = DB::table('authors')->insertGetId([
+            $book['author'] = DB::table('authors')->insertGetId([
                 'name' => $name['author']
             ]);
         }
 
-//        $book = $request->only('title');
-//        $author_name = $request->only('author');
-//        $author = DB::table('authors')->select('*')->where('author', $author_name)->get()->first();
-//        if ($author) {
-//            $book['author'] = $author->id;
-//        } else {
-//            $book['author'] = DB::table('authors')
-//                ->insertGetId(['name' => $author_name['author']]);
-//        }
-//        $req = Book::create($book);
-        $req = Book::create($data);
+        $req = Book::create($book);
         return redirect()->route('books.index');
     }
 

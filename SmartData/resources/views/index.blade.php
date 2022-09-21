@@ -14,12 +14,12 @@
         <tbody>
         @foreach($books as $book)
         <tr>
-            <th scope="row">{{$book->id}}</th>
+            <th scope="row">{{ $book->id }}</th>
             <th>
-                <a href="{{ route('books.show', $book) }}">{{$book->title}}</a>
+                <a href="{{ route('books.show', $book) }}">{{ $book->title }}</a>
             </td>
             <td>
-                <a href="{{ route('books.show', $book) }}">{{ $book->author->name ?? ''}}</a>
+                <a href="{{ route('books.show', $book) }}">{{ $book->author}}</a>
             </td>
             <td>
                 <form method="POST" action="{{ route('books.destroy', $book) }}">

@@ -12,14 +12,14 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($authors as $author)
+        @foreach($res as $author_id => $author)
             <tr>
                 <th scope="row">{{$author->id}}</th>
                 <th>
                     <a href="{{ route('authors.show', $author) }}">{{$author->name}}</a>
                 </td>
                 <td>
-                    <a href="{{ route('authors.show', $author) }}"> {{ $author->books_amount ?? 0 }}</a>
+                    <a href="{{ route('authors.show', $author) }}"> {{ $author->count }}</a>
                 </td>
                 <td>
                     <form method="POST" action="{{ route('authors.destroy', $author) }}">
